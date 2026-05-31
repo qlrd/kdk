@@ -1,5 +1,7 @@
 # KDK
 
+<img src="assets/logo.png" />
+
 A WIP development kit in Rust for microcontroller bitcoin wallet signers
 (mainly aimed to ESP32 or STM32) in Krux-style hardware signers
 based on past [proposition to redesign krux](https://github.com/selfcustody/krux/discussions/189).
