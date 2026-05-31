@@ -1,0 +1,15 @@
+.DS_STORE
+target/**
+
+# Rustdoc snapshot — built fresh by .github/workflows/docs.yml and
+# deployed to the `gh-pages` branch. Local `cargo doc` output can
+# live here for browsing without being committed.
+docs/
+
+# Python (tests/, kdk-wallet-py maturin builds)
+__pycache__/
+.venv/
+.pytest_cache/
+*.egg-info/
+wheels/
+

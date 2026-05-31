@@ -1,0 +1,60 @@
+# Build rustdoc for the workspace and publish it to the `gh-pages`
+# branch. Triggers on every push to `main` and on manual dispatch.
+#
+# Conventions:
+# - `force_orphan: true` keeps `gh-pages` at a single rolling commit
+#   (no binary-churn history bloat).
+# - `.nojekyll` disables Jekyll so rustdoc's `_underscore`-prefixed
+#   files (search index, theme bits) are served verbatim.
+# - The redirect `index.html` sends visitors to the first crate's
+#   docs since rustdoc doesn't emit a workspace landing page.
+
+name: Docs
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gh-pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Build & deploy rustdoc
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Build rustdoc
+        run: cargo doc --workspace --no-deps
+
+      - name: Add redirect index + disable Jekyll
+        run: |
+          cat > target/doc/index.html <<'HTML'
+          <!DOCTYPE html>
+          <meta charset="utf-8">
+          <title>KDK API docs</title>
+          <meta http-equiv="refresh" content="0; url=./kdk_zeroize/index.html">
+          <link rel="canonical" href="./kdk_zeroize/index.html">
+          HTML
+          touch target/doc/.nojekyll
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./target/doc
+          publish_branch: gh-pages
+          force_orphan: true
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: 'docs: rebuild from ${{ github.sha }}'

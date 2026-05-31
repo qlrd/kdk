@@ -1,0 +1,23 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/kdk-zeroize",
+    # "crates/kdk-entropy",
+    # "crates/kdk-kef",
+    # "crates/kdk-menu",
+    # "crates/kdk-psbt",
+    # "crates/kdk-qr",
+    # "crates/kdk-sim",
+    # "crates/kdk-splash",
+    # "crates/kdk-wallet",
+    # "crates/kdk-wallet-py",
+    # "crates/kdk-wallet-c"
+    # "crates/kdk-menu"
+    # "crates/kdk-flasher"
+    # "crates/kdk-ur"
+]
+
+[workspace.package]
+edition = "2021"
+license = "MIT"
+repository = "https://github.com/qlrd/kdk"
