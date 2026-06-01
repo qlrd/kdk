@@ -1,13 +1,7 @@
-//! The kdk-zeroize guarantee can't be observed from outside the
-//! process.
+//! Behavioural tests: `expose_secret`, `Debug` redaction, origin markers, etc.
 //!
-//! Rust's memory model doesn't expose dropped storage so these tests are an
-//! attempt to observe how probably a pin could occurs on through a
-//! `expose_secret`, `Debug` redaction, `Drop` runs without panic,
-//! `as_slice` agreement, etc., rather than the wipe itself.
-//!
-//! The wipe correctness is delegated to whoever wants to audit this crate and
-//! we be welcomed through a [`SECURITY.md`] report.
+//! Drop-time wipe proof lives in `tests/amnesia.rs` (`Box::into_raw` →
+//! `drop_in_place` → volatile byte check → `dealloc`).
 use kdk_zeroize::SensitiveBytes;
 
 enum AesKey {}
