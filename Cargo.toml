@@ -2,7 +2,7 @@
 resolver = "2"
 members = [
     "crates/kdk-zeroize",
-    # "crates/kdk-entropy",
+    "crates/kdk-entropy",
     # "crates/kdk-kef",
     # "crates/kdk-menu",
     # "crates/kdk-psbt",
