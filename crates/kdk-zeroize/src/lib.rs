@@ -22,7 +22,5 @@
 #![no_std]
 
 mod sensitive;
-mod wipe;
 
-pub use sensitive::SensitiveBytes;
-pub use wipe::wipe_in_place_mut;
+pub use sensitive::{wipe_in_place_mut, SensitiveBytes};
