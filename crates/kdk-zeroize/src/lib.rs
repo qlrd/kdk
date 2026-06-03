@@ -20,6 +20,7 @@
 //! through every downstream crate.
 
 #![no_std]
+#![doc(html_logo_url = "https://qlrd.github.io/kdk/logo.png")]
 
 mod sensitive;
 
