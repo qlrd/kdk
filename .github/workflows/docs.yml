@@ -38,37 +38,25 @@ jobs:
       - name: Build rustdoc
         run: cargo doc --workspace --no-deps
 
-      - name: Build landing index + copy logo + disable Jekyll
+      - name: Copy logo + write minimal index + disable Jekyll
         run: |
-          # Copy the project logo so it lands at /logo.png on gh-pages
-          # and can be referenced from the landing page.
+          # Logo at /logo.png — referenced from every crate via
+          # `#![doc(html_logo_url = "https://qlrd.github.io/kdk/logo.png")]`.
           cp assets/logo.png target/doc/logo.png
 
-          # List every documented crate by scanning `target/doc/*/`.
-          # A real crate dir contains an `index.html`; auxiliary dirs
-          # (`search.index/`, `static.files/`, `src/`, etc.) don't.
+          # Minimal index — bare list of documented crates. Each crate
+          # page already renders the KDK logo in its sidebar via
+          # `html_logo_url`, so this page only needs to point at them.
           cat > target/doc/index.html <<'HEAD'
           <!DOCTYPE html>
           <meta charset="utf-8">
-          <title>KDK — API docs</title>
-          <style>
-            body { font-family: system-ui, sans-serif; max-width: 40em; margin: 2em auto; padding: 0 1em; }
-            .logo { display: block; max-width: 360px; height: auto; margin: 0 auto 1.5em; }
-            h1 { font-size: 1.3em; text-align: center; }
-            ul { line-height: 1.8; }
-            code { background: #f4f4f4; padding: 0 0.3em; border-radius: 3px; }
-            .tagline { text-align: center; color: #555; margin-bottom: 2em; }
-          </style>
-          <img src="./logo.png" alt="KDK" class="logo">
-          <h1>Krust Development Kit</h1>
-          <p class="tagline">Rust toolkit for Krux-style Bitcoin signing firmware.</p>
-          <p>Documented crates:</p>
+          <title>KDK</title>
           <ul>
           HEAD
           for d in target/doc/*/; do
             crate=$(basename "$d")
             if [ -f "${d}index.html" ]; then
-              printf '<li><a href="./%s/index.html"><code>%s</code></a></li>\n' "$crate" "$crate" >> target/doc/index.html
+              printf '<li><a href="./%s/index.html">%s</a></li>\n' "$crate" "$crate" >> target/doc/index.html
             fi
           done
           cat >> target/doc/index.html <<'TAIL'
