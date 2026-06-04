@@ -1,3 +1,4 @@
+use kdk_zeroize::prelude::*;
 use sha2::{Digest, Sha256};
 
 use crate::error::EntropyError;
@@ -46,6 +47,7 @@ pub const fn max_draws<const CARDS: u8, const N: usize>() -> Result<usize, Entro
 ///
 /// ```
 /// use kdk_entropy::{deck_to_entropy, DeckEntropy};
+/// use kdk_zeroize::prelude::*;
 ///
 /// // SHA-256("0-1-2-3-...-24")[:16].
 /// let cards: [u8; 25] = [

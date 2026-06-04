@@ -1,3 +1,4 @@
+use kdk_zeroize::prelude::*;
 use sha2::{Digest, Sha256};
 
 use crate::error::EntropyError;
@@ -32,6 +33,7 @@ pub const fn max_flips<const N: usize>() -> Result<usize, EntropyError> {
 ///
 /// ```
 /// use kdk_entropy::{coin_to_entropy, CoinEntropy};
+/// use kdk_zeroize::prelude::*;
 ///
 /// // SHA-256("0" * 128)[:16].
 /// let flips = [0u8; 128];

@@ -1,4 +1,5 @@
 use kdk_entropy::{deck_to_entropy, max_draws, min_draws, DeckEntropy, EntropyError};
+use kdk_zeroize::prelude::*;
 
 macro_rules! min_draws_ok {
     ($name:ident, $cards:literal, $n:literal => $expected:literal) => {

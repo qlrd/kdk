@@ -1,3 +1,4 @@
+use kdk_zeroize::prelude::*;
 use sha2::{Digest, Sha256};
 
 use crate::error::EntropyError;
@@ -38,6 +39,7 @@ pub const fn max_rolls<const FACES: u8, const N: usize>() -> Result<usize, Entro
 ///
 /// ```
 /// use kdk_entropy::{dice_to_entropy, DiceEntropy};
+/// use kdk_zeroize::prelude::*;
 ///
 /// // 50 d6 rolls (all "1") → SHA-256("1"*50) truncated to 16 bytes.
 /// // Same bytes Krux produces for the same input.

@@ -1,4 +1,5 @@
 use kdk_entropy::{coin_to_entropy, max_flips, min_flips, CoinEntropy, EntropyError};
+use kdk_zeroize::prelude::*;
 
 macro_rules! min_flips_ok {
     ($name:ident, $n:literal => $expected:literal) => {
