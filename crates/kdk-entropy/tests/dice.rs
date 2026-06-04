@@ -1,4 +1,5 @@
 use kdk_entropy::{dice_to_entropy, max_rolls, min_rolls, DiceEntropy, EntropyError};
+use kdk_zeroize::prelude::*;
 
 macro_rules! min_rolls_ok {
     ($name:ident, $faces:literal, $n:literal => $expected:literal) => {
