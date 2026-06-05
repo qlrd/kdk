@@ -10,6 +10,9 @@ use crate::CoinEntropy;
 pub const fn min_flips<const N: usize>() -> Result<usize, EntropyError> {
     match N {
         16 => Ok(128),
+        20 => Ok(160),
+        24 => Ok(192),
+        28 => Ok(224),
         32 => Ok(256),
         _ => Err(EntropyError::UnsupportedConfig(2, N)),
     }
