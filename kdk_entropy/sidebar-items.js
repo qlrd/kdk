@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["Coin","Deck","Dice","EntropyError"],"fn":["coin_to_entropy","deck_to_entropy","dice_to_entropy","max_draws","max_flips","max_rolls","min_draws","min_flips","min_rolls"],"type":["CoinEntropy","DeckEntropy","DiceEntropy"]};

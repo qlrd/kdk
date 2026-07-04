@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["wipe_in_place_mut"],"mod":["prelude"],"struct":["SensitiveBytes"],"trait":["Sensitive","SensitiveMut"]};
