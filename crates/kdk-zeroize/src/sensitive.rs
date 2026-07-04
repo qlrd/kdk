@@ -97,6 +97,14 @@ impl<const N: usize, O> fmt::Debug for SensitiveBytes<N, O> {
     }
 }
 
+// Mirrors the redacted `Debug` so `{}` is also safe; raw `[u8; N]` has
+// no `Display` impl at all, so this is an additive safety surface.
+impl<const N: usize, O> fmt::Display for SensitiveBytes<N, O> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.write_str("SensitiveBytes(REDACTED)")
+    }
+}
+
 impl<const N: usize, O> Sensitive for SensitiveBytes<N, O> {
     type Inner = [u8; N];
 

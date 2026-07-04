@@ -1,0 +1,36 @@
+[package]
+name = "kdk-mnemonic"
+version = "0.0.1"
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "BIP39 mnemonic conversion"
+
+[dependencies]
+kdk-zeroize = { path = "../kdk-zeroize" }
+kdk-entropy = { path = "../kdk-entropy" }
+bip39 = { version = "2", default-features = false, features = ["alloc"] }
+
+[features]
+default = ["words-12", "words-24", "dice"]
+words-12 = []   # 12-word mnemonic, 16-byte entropy
+words-15 = []   # 15-word, 20-byte
+words-18 = []   # 18-word, 24-byte
+words-21 = []   # 21-word, 28-byte
+words-24 = []   # 24-word, 32-byte
+extended = ["words-15", "words-18", "words-21"]
+dice = []
+coin = []
+deck = []
+
+[[example]]
+name = "games"
+required-features = ["coin", "dice", "deck", "words-12", "words-24"]
+
+[[example]]
+name = "games_extended"
+required-features = ["coin", "extended"]
+
+[[example]]
+name = "secret_leak"
+required-features = ["words-12"]

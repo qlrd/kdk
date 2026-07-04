@@ -56,12 +56,18 @@ macro_rules! coin_rejects {
 }
 
 min_flips_ok!(min_flips_128bit, 16 => 128);
+min_flips_ok!(min_flips_160bit, 20 => 160);
+min_flips_ok!(min_flips_192bit, 24 => 192);
+min_flips_ok!(min_flips_224bit, 28 => 224);
 min_flips_ok!(min_flips_256bit, 32 => 256);
 
 max_flips_ok!(max_flips_128bit, 16 => 256);
+max_flips_ok!(max_flips_160bit, 20 => 320);
+max_flips_ok!(max_flips_192bit, 24 => 384);
+max_flips_ok!(max_flips_224bit, 28 => 448);
 max_flips_ok!(max_flips_256bit, 32 => 512);
 
-flips_unsupported!(flips_unsupported_24, 24);
+flips_unsupported!(flips_unsupported_18, 18);
 flips_unsupported!(flips_unsupported_1, 1);
 
 // SHA-256("0" * 128)[:16]
@@ -78,7 +84,7 @@ coin_vector!(all_ones_matches_sha256, 16, [1u8; 128] => &[
 
 coin_rejects!(too_few_flips, 16, [0u8; 127] => EntropyError::TooFewRolls(128, 127));
 coin_rejects!(too_many_flips, 16, [0u8; 257] => EntropyError::TooManyRolls(256, 257));
-coin_rejects!(unsupported_buffer_24, 24, [0u8; 192] => EntropyError::UnsupportedConfig(2, 24));
+coin_rejects!(unsupported_buffer_18, 18, [0u8; 144] => EntropyError::UnsupportedConfig(2, 18));
 
 #[test]
 fn deterministic_for_same_input() {
